@@ -16,7 +16,7 @@ Install through Chrome Web Store
 - switch between leg-based and segment-based url generation
 - links to gcm and wheretocredit
 
-##Credits
+## Credits
 This extension is based on [ITA-Matrix PowerTools](https://github.com/SteppoFF/ita-matrix-powertools).
 
 Thanks to paul21, Steppo, IAkH, 18sas and many more!
