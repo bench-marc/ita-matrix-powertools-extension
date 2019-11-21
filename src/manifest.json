@@ -1,0 +1,29 @@
+{
+  "name": "ITA-Matrix PowerTools",
+  "description": "ITA-Matrix-PowerTools add some additional features and booking links to Matrix of ITA Software",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/16.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_title": "ita-powertools-extension"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+      {
+          "matches": ["*://matrix.itasoftware.com/*"],
+          "js": ["content.js"],
+          "css": ["content.css"]
+      }
+  ]
+}
