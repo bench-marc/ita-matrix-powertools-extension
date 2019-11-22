@@ -1,6 +1,6 @@
 {
   "name": "ita-matrix-powertools-extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ITA-Matrix-PowerTools add some additional features and booking links to Matrix of ITA Software",
   "author": "bench-marc",
   "scripts": {
