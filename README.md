@@ -1,7 +1,7 @@
 ITA Matrix PowerTools Extension
 =============
 
-This chrome extension adds some addtional functionality and booking links to [Matrix by ITA Software](https://matrix.itasoftware.com/).
+This chrome extension adds some additional functionality and booking links to [Matrix by ITA Software](https://matrix.itasoftware.com/).
 
 Based on the [Flyertalk Userscript](https://www.flyertalk.com/forum/travel-tools/1623427-ita-matrix-powertools-userscript-orbitz-dl-ua-aa-ba-cz-ib-la-lh-lx-tk.html) this extensions makes the ITA-Matrix PowerTools easily accessible to all (chrome) users without having to deal with loading the script into the browser.
 
