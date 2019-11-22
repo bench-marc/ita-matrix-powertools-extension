@@ -35,7 +35,7 @@ export function getKayakUrl(
           ("0" + currentItin["itin"][i]["dep"]["day"]).slice(-2);
       segsize++;
     }
-    url += currentItin.pax.adults + "adults";
+    url += "/" + currentItin.pax.adults + "adults";
     if (currentItin.pax.children + currentItin.pax.infantsSeat + currentItin.pax.infantsLap) {
       url += '/children' + '-1S'.repeat(currentItin.pax.infantsSeat) + '-1L'.repeat(currentItin.pax.infantsLap) + '-11'.repeat(currentItin.pax.children)
     }
