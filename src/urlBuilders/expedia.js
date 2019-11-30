@@ -40,11 +40,11 @@ export function getExpediaUrl(currentItin, baseUrl) {
         "https://www." +
         baseUrl +
         "/Flight-Search-Details?action=dl&trip=MultipleDestination&cabinClass=" +
-        (currentItin["itin"][0]["seg"][0]["cabin"] == 0
+        (currentItin.requestedCabin == 0
             ? "coach"
-            : currentItin["itin"][0]["seg"][0]["cabin"] == 1
+            : currentItin.requestedCabin == 1
             ? "premium"
-            : currentItin["itin"][0]["seg"][0]["cabin"] == 2
+            : currentItin.requestedCabin == 2
             ? "business"
             : "first") +
         "&adults=" +

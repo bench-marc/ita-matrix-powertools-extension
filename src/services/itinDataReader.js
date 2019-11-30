@@ -31,6 +31,8 @@ export function getCurrentItin(html, mptUsersettings) {
 
     const farebases = [];
     const dirtyFare = [];
+    let highestCabin = 0;
+    let lowestCabin = 3;
     for (let i = 0; i < temp.length; i += 3) {
         const current = temp[i];
         const next = temp[i + 1];
@@ -83,6 +85,12 @@ export function getCurrentItin(html, mptUsersettings) {
         temp["duration"] = parseInt(segs[i + 8]) * 60 + parseInt(segs[i + 9]);
         temp["aircraft"] = segs[i + 10];
         temp["cabin"] = getCabinCode(segs[i + 11]);
+        if (temp['cabin'] > highestCabin) {
+          highestCabin = temp['cabin']
+        }
+        if (temp['cabin'] < lowestCabin) {
+          lowestCabin = temp['cabin']
+        }
         temp["bookingclass"] = segs[i + 12];
 
         var addinformations = parseAddInfo(segs[i + 13]);
@@ -206,7 +214,7 @@ export function getCurrentItin(html, mptUsersettings) {
                 }
             }
             if (tmp === 0) {
-                print("Unused fare:" + dirtyFare[i]);
+                console.log("Unused fare:" + dirtyFare[i]);
             }
         }
     }
@@ -232,6 +240,7 @@ export function getCurrentItin(html, mptUsersettings) {
       infantsLap: 0,
       infantsSeat: 0
     };
+
     const paxElements = document.querySelectorAll('td.IR6M2QD-x-c');
     if (paxElements.length) {
       paxElements.forEach(e => {
@@ -247,8 +256,18 @@ export function getCurrentItin(html, mptUsersettings) {
           pax['adults'] = count;
         }
       });
+    }
+    // passenger fallback
+    if (pax['adults'] + pax['children'] + pax['infantsSeat'] + pax['infantsLap'] == 0) {
+      pax['adults'] = Number(milepaxprice[1])
+    }
+
+    let requestedCabin = 0;
+    // get requested cabin
+    if (document.querySelectorAll('div.IR6M2QD-j-a img.IR6M2QD-b-a[title="Preferred cabin is not available on some flights."]').length > 0) {
+      requestedCabin = highestCabin;
     } else {
-      pax['adults'] = 1;
+      requestedCabin = lowestCabin;
     }
 
     if (milepaxprice.length) {
@@ -260,7 +279,8 @@ export function getCurrentItin(html, mptUsersettings) {
           carriers: carrieruarray,
           cur: itinCur,
           farebases: farebases,
-          dist: Number(milepaxprice[0].replace(/,/, ""))
+          dist: Number(milepaxprice[0].replace(/,/, "")),
+          requestedCabin: requestedCabin
       };
     }
 }

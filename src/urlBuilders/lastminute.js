@@ -1,4 +1,10 @@
 export function getLastminuteUrl(currentItin) {
+  const lmCabin = {
+    0: 'Y',
+    1: 'P',
+    2: 'C',
+    3: 'F'
+  }
   if (currentItin['itin'].length != 1 && (currentItin['itin'].length > 2 || currentItin['itin'][0]['orig'] != currentItin['itin'][1]['dest'] || currentItin['itin'][1]['orig'] != currentItin['itin'][0]['dest'])) {
     return;
   }
@@ -9,6 +15,6 @@ export function getLastminuteUrl(currentItin) {
   if (currentItin['itin'].length == 2) {
     url += '&roundtrip=true&returnDay=' + ('0' + currentItin['itin'][1]['dep']['day']).slice(-2) + '&returnMonthYear=' + ('0' + currentItin['itin'][1]['dep']['month']).slice(-2) + currentItin['itin'][1]['dep']['year'] + '&returnDayMonthYear=' + ('0' + currentItin['itin'][1]['dep']['day']).slice(-2) + ('0' + currentItin['itin'][1]['dep']['month']).slice(-2) + currentItin['itin'][1]['dep']['year'];
   }
-  url += '&classFlight=Y&adults=1&childs=0&infants=0&currency=EUR&acntb=flight';
+  url += `&classFlight=${lmCabin[currentItin.requestedCabin]}&adults=1&childs=0&infants=0&currency=EUR&acntb=flight`;
   return url
 }

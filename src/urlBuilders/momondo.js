@@ -16,6 +16,12 @@ export const momondoEditions = [
 ];
 
 export function getMomondoUrl(currentItin, host) {
+    const momondoCabin = {
+      0: 'economy',
+      1: 'premium',
+      2: 'business',
+      3: 'first'
+    }
     //example http://www.Momondo.ru/flightsearch/?...false&NA=false
     //pax # &AD=2&CA=0,8 – not working with children (total amount of adults + kids goes to adult)
     let url;
@@ -37,6 +43,9 @@ export function getMomondoUrl(currentItin, host) {
         "-" +
         ("0" + currentItin["itin"][i]["dep"]["day"]).slice(-2) +
         "/";
+    }
+    if (currentItin.requestedCabin > 0) {
+      url += `${momondoCabin[currentItin.requestedCabin]}/`
     }
     url += currentItin.pax.adults + "adults";
     if (currentItin.pax.children + currentItin.pax.infantsSeat + currentItin.pax.infantsLap) {

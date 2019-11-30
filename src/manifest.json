@@ -1,7 +1,7 @@
 {
   "name": "ITA-Matrix PowerTools",
   "description": "ITA-Matrix-PowerTools add some additional features and booking links to Matrix of ITA Software",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 2,
   "icons": {
     "16": "icons/16.png",

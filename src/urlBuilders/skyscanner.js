@@ -16,6 +16,12 @@ export const skyscannerEditions = [
 ];
 
 export function getSkyscannerUrl(currentItin, market) {
+    const skyscannerCabin = {
+      0: '',
+      1: 'premiumeconomy',
+      2: 'business',
+      3: 'first'
+    }
     //example https://www.skyscanner.ru/transport/d/stoc/2017-09-02/akl/akl/2017-09-16/stoc/akl/2017-09-29/syd?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&cabinclass=economy&ref=day-view#results
     if (!market) {
         market = "Skyscanner.com";
@@ -40,6 +46,6 @@ export function getSkyscannerUrl(currentItin, market) {
     if (currentItin.pax.children + currentItin.pax.infantsSeat + currentItin.pax.infantsLap) {
       url += `&children=${currentItin.pax.children + currentItin.pax.infantsSeat}&infants=${currentItin.pax.infantsLap}`
     }
-    url += "&ref=day-view&market=" + market;
+    url += "&cabinclass=" + skyscannerCabin[currentItin.requestedCabin] + "&ref=day-view&market=" + market;
     return url;
 }

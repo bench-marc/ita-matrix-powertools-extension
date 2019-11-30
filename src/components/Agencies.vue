@@ -116,6 +116,7 @@ export default {
         numPax: this.originalItin.numPax,
         pax: this.originalItin.pax,
         price: this.originalItin.price,
+        requestedCabin: this.originalItin.requestedCabin
       }
     },
     currentItin: function() {

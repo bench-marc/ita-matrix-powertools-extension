@@ -19,6 +19,12 @@ export function getKayakUrl(
     currentItin,
     host
 ) {
+    const kayakCabin = {
+      0: 'economy',
+      1: 'premium',
+      2: 'business',
+      3: 'first'
+    }
     //example https://www.Kayak.ru/flights/MOW-CPH...OW/2016-05-20/
 
     let url = "https://www." + host + "/flights";
@@ -34,6 +40,9 @@ export function getKayakUrl(
           "-" +
           ("0" + currentItin["itin"][i]["dep"]["day"]).slice(-2);
       segsize++;
+    }
+    if (currentItin.requestedCabin > 0) {
+      url += `/${kayakCabin[currentItin.requestedCabin]}`
     }
     url += "/" + currentItin.pax.adults + "adults";
     if (currentItin.pax.children + currentItin.pax.infantsSeat + currentItin.pax.infantsLap) {
