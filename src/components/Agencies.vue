@@ -29,6 +29,9 @@
     <div v-if="showLx" class="agency">
       <url-container name="Swiss" :urls="lxUrls"></url-container>
     </div>
+    <div class="agency">
+      <url-container name="KLM" :urls="klUrls"></url-container>
+    </div>
     <hr>
     <div class="agency">
       <url-container name="Expedia" :urls="expediaUrls"></url-container>
@@ -85,6 +88,7 @@ import { getAfUrl, afEditions } from "../urlBuilders/airFrance"
 import { getIbUrl, ibEditions } from "../urlBuilders/iberia"
 import { getLhUrl, lhEditions } from "../urlBuilders/lufthansa"
 import { getLxUrl, lxEditions } from "../urlBuilders/swiss"
+import { getKlUrl, klEditions } from "../urlBuilders/klm"
 import { getGoogleUrl } from "../urlBuilders/google";
 import UrlContainer from './UrlContainer.vue'
 import WhereToCredit from './WhereToCredit.vue'
@@ -169,6 +173,11 @@ export default {
     lxUrls: function() {
       return lxEditions.map(e => {
         return { text: e.name, url: getLxUrl(this.currentItin, e.value) };
+      })
+    },
+    klUrls: function() {
+      return klEditions.map(e => {
+        return { text: e.name, url: getKlUrl(this.currentItin, e) };
       })
     },
     pricelineUrl: function() {
