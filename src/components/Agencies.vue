@@ -2,14 +2,17 @@
   <div id="powertoolslinkcontainer">
     <div id="mode" v-if="showModeSelect">
       <h3>Generation mode</h3>
-      <input id="legbased" type="radio" v-model="mode" value="leg">
+      <input id="legbased" type="radio" v-model="mode" value="leg" />
       <label for="legbased">leg-based</label>
-      <input id="segmentbased" type="radio" v-model="mode" value="segment">
+      <input id="segmentbased" type="radio" v-model="mode" value="segment" />
       <label for="segmentbased">segment-based</label>
     </div>
-    <hr>
+    <hr />
     <div class="agency">
-      <a :href="aaUrl" target="_blank">American Airlines</a>
+      <url-container name="American Airlines (Europe/Asia/Pacific)" :urls="aaUrl"></url-container>
+    </div>
+    <div class="agency">
+      <a :href="aa1Url" target="_blank">American Airlines (America & UK)</a>
     </div>
     <div class="agency">
       <url-container name="Air Canada" :urls="acUrls"></url-container>
@@ -32,23 +35,15 @@
     <div class="agency">
       <url-container name="KLM" :urls="klUrls"></url-container>
     </div>
-    <hr>
+    <hr />
     <div class="agency">
       <url-container name="Expedia" :urls="expediaUrls"></url-container>
     </div>
-    <div class="agency">
-      <a :href="pricelineUrl" target="_blank">Priceline</a><br>
-    </div>
-    <div class="agency">
-      <a :href="cheapOairUrl" target="_blank">CheapOair</a><br>
-    </div>
-    <div v-if="lastminuteUrl" class="agency">
-      <a :href="lastminuteUrl" target="_blank">Lastminute.de</a><br>
-    </div>
-    <hr>
-    <div class="agency">
-      <a :href="hipmunkUrl" target="_blank">Hipmunk</a><br>
-    </div>
+    <div class="agency"><a :href="pricelineUrl" target="_blank">Priceline</a><br /></div>
+    <div class="agency"><a :href="cheapOairUrl" target="_blank">CheapOair</a><br /></div>
+    <div v-if="lastminuteUrl" class="agency"><a :href="lastminuteUrl" target="_blank">Lastminute.de</a><br /></div>
+    <hr />
+    <div class="agency"><a :href="hipmunkUrl" target="_blank">Hipmunk</a><br /></div>
     <div class="agency">
       <url-container name="Momondo" :urls="momondoUrls"></url-container>
     </div>
@@ -58,10 +53,8 @@
     <div class="agency">
       <url-container name="Skyscanner" :urls="skyscannerUrls"></url-container>
     </div>
-    <div class="agency">
-      <a :href="googleUrl" target="_blank">Google Flights</a><br>
-    </div>
-    <hr>
+    <div class="agency"><a :href="googleUrl" target="_blank">Google Flights</a><br /></div>
+    <hr />
     <div class="agency">
       <a :href="gcmUrl" target="_blank">GCM</a>
     </div>
@@ -72,35 +65,35 @@
 </template>
 
 <script>
-import { getPricelineUrl } from "../urlBuilders/priceline";
-import { getCheapOairUrl } from "../urlBuilders/cheapOair";
-import { getExpediaUrl, exEditions } from "../urlBuilders/expedia";
-import { getMomondoUrl, momondoEditions } from "../urlBuilders/momondo";
-import { getLastminuteUrl } from "../urlBuilders/lastminute";
-import { getKayakUrl, kayakEditions } from "../urlBuilders/kayak";
-import { getSkyscannerUrl, skyscannerEditions } from "../urlBuilders/skyscanner";
-import { getHipmunkUrl } from "../urlBuilders/hipmunk";
-import { getGcmUrl } from "../urlBuilders/gcm";
-import { getAAc1Url } from "../urlBuilders/americanAirlines"
-import { getDlUrl, dlEditions } from "../urlBuilders/delta"
-import { getAcUrl, acEditions } from "../urlBuilders/airCanada"
-import { getAfUrl, afEditions } from "../urlBuilders/airFrance"
-import { getIbUrl, ibEditions } from "../urlBuilders/iberia"
-import { getLhUrl, lhEditions } from "../urlBuilders/lufthansa"
-import { getLxUrl, lxEditions } from "../urlBuilders/swiss"
-import { getKlUrl, klEditions } from "../urlBuilders/klm"
-import { getGoogleUrl } from "../urlBuilders/google";
-import UrlContainer from './UrlContainer.vue'
-import WhereToCredit from './WhereToCredit.vue'
+import { getPricelineUrl } from '../urlBuilders/priceline';
+import { getCheapOairUrl } from '../urlBuilders/cheapOair';
+import { getExpediaUrl, exEditions } from '../urlBuilders/expedia';
+import { getMomondoUrl, momondoEditions } from '../urlBuilders/momondo';
+import { getLastminuteUrl } from '../urlBuilders/lastminute';
+import { getKayakUrl, kayakEditions } from '../urlBuilders/kayak';
+import { getSkyscannerUrl, skyscannerEditions } from '../urlBuilders/skyscanner';
+import { getHipmunkUrl } from '../urlBuilders/hipmunk';
+import { getGcmUrl } from '../urlBuilders/gcm';
+import { getAAc1Url, getAAUrl, aaEditions } from '../urlBuilders/americanAirlines';
+import { getDlUrl, dlEditions } from '../urlBuilders/delta';
+import { getAcUrl, acEditions } from '../urlBuilders/airCanada';
+import { getAfUrl, afEditions } from '../urlBuilders/airFrance';
+import { getIbUrl, ibEditions } from '../urlBuilders/iberia';
+import { getLhUrl, lhEditions } from '../urlBuilders/lufthansa';
+import { getLxUrl, lxEditions } from '../urlBuilders/swiss';
+import { getKlUrl, klEditions } from '../urlBuilders/klm';
+import { getGoogleUrl } from '../urlBuilders/google';
+import UrlContainer from './UrlContainer.vue';
+import WhereToCredit from './WhereToCredit.vue';
 
 export default {
   components: {
     UrlContainer,
-    WhereToCredit
+    WhereToCredit,
   },
   computed: {
     currentItinSingle: function() {
-      let itinSingle = []
+      let itinSingle = [];
       this.originalItin.itin.forEach(l => {
         l.seg.forEach(s => {
           itinSingle.push({
@@ -108,10 +101,10 @@ export default {
             dep: s.dep,
             dest: s.dest,
             orig: s.orig,
-            seg: [s]
-          })
-        })
-      })
+            seg: [s],
+          });
+        });
+      });
       return {
         carriers: this.originalItin.carriers,
         cur: this.originalItin.cur,
@@ -120,94 +113,100 @@ export default {
         numPax: this.originalItin.numPax,
         pax: this.originalItin.pax,
         price: this.originalItin.price,
-        requestedCabin: this.originalItin.requestedCabin
-      }
+        requestedCabin: this.originalItin.requestedCabin,
+      };
     },
     currentItin: function() {
       if (this.mode == 'leg') {
-        return this.originalItin
+        return this.originalItin;
       } else {
-        return this.currentItinSingle
+        return this.currentItinSingle;
       }
     },
     showModeSelect: function() {
-      return this.originalItin.itin.length != this.currentItinSingle.itin.length
+      return this.originalItin.itin.length != this.currentItinSingle.itin.length;
     },
     showOneWorld: function() {
-      return this.currentItin.carriers.includes('IB') || this.currentItin.carriers.includes('BA')
+      return this.currentItin.carriers.includes('IB') || this.currentItin.carriers.includes('BA');
     },
     showLh: function() {
-      return this.currentItin.carriers.includes('LH') || this.currentItin.carriers.includes('OS')
+      return this.currentItin.carriers.includes('LH') || this.currentItin.carriers.includes('OS');
     },
     showLx: function() {
-      return this.currentItin.carriers.includes('LX')
+      return this.currentItin.carriers.includes('LX');
+    },
+    aa1Url: function() {
+      return getAAc1Url(this.currentItin);
     },
     aaUrl: function() {
-      return getAAc1Url(this.currentItin)
+      return aaEditions.map(({ name, value }) => ({
+        text: name,
+        url: getAAUrl(this.currentItin, value.split('_')),
+      }));
     },
     acUrls: function() {
       return acEditions.map(e => {
         return { text: e.name, url: getAcUrl(this.currentItin, e.value) };
-      })
+      });
     },
     afUrls: function() {
       return afEditions.map(e => {
         return { text: e.name, url: getAfUrl(this.currentItin, e.value) };
-      })
+      });
     },
     ibUrls: function() {
       return ibEditions.map(e => {
         return { text: e.name, url: getIbUrl(this.currentItin, e.value) };
-      })
+      });
     },
     deltaUrls: function() {
       return dlEditions.map(e => {
         return { text: e.name, url: getDlUrl(this.currentItin, e.value) };
-      })
+      });
     },
     lhUrls: function() {
       return lhEditions.map(e => {
         return { text: e.name, url: getLhUrl(this.currentItin, e.value) };
-      })
+      });
     },
     lxUrls: function() {
       return lxEditions.map(e => {
         return { text: e.name, url: getLxUrl(this.currentItin, e.value) };
-      })
+      });
     },
     klUrls: function() {
       return klEditions.map(e => {
         return { text: e.name, url: getKlUrl(this.currentItin, e) };
-      })
+      });
     },
     pricelineUrl: function() {
-      return getPricelineUrl(this.currentItin)
+      return getPricelineUrl(this.currentItin);
     },
     cheapOairUrl: function() {
-      return getCheapOairUrl(this.currentItin)
+      return getCheapOairUrl(this.currentItin);
     },
     expediaUrls: function() {
       return exEditions.map(e => {
         return { text: e.name, url: getExpediaUrl(this.currentItin, e.host) };
-      })
+      });
     },
     hipmunkUrl: function() {
-      return getHipmunkUrl(this.currentItin)
+      return getHipmunkUrl(this.currentItin);
     },
     momondoUrls: function() {
       return momondoEditions.map(e => {
         return { text: e.name, url: getMomondoUrl(this.currentItin, e.host) };
-      })
+      });
     },
     kayakUrls: function() {
       return kayakEditions.map(e => {
         return { text: e.name, url: getKayakUrl(this.currentItin, e.host) };
-      })
+      });
     },
     skyscannerUrls: function() {
       return skyscannerEditions.map(e => {
         return { text: e.name, url: getSkyscannerUrl(this.currentItin, e.host) };
-      })
+      });
     },
     lastminuteUrl: function() {
       return getLastminuteUrl(this.currentItin);
@@ -217,22 +216,22 @@ export default {
     },
     gcmUrl: function() {
       return getGcmUrl(this.currentItin);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 #powertoolslinkcontainer {
-  margin:15px 0px 0px 10px
+  margin: 15px 0px 0px 10px;
 }
 a {
   margin: 5px 0px 10px 0px;
-  font-size:100%;
-  font-weight:600;
+  font-size: 100%;
+  font-weight: 600;
 }
 .agency {
-  margin: 5px 0px 10px 0px
+  margin: 5px 0px 10px 0px;
 }
 input {
   vertical-align: middle;
