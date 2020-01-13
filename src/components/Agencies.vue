@@ -109,6 +109,7 @@ export default {
         carriers: this.originalItin.carriers,
         cur: this.originalItin.cur,
         dist: this.originalItin.dist,
+        farebases: this.originalItin.farebases,
         itin: itinSingle,
         numPax: this.originalItin.numPax,
         pax: this.originalItin.pax,
