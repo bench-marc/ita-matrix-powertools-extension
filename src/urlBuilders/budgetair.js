@@ -1,7 +1,7 @@
 import { convertToQueryParams, dateObjectToFormatedString, convertArrayToFlatObject } from '../utils';
 import { validatePaxcount } from './shared';
 
-export const budgetairEditions = [
+const budgetairEditions = [
   { name: 'Flugladen.de', host: 'flugladen.de' },
   { name: 'Budgetair.co.uk', host: 'budgetair.co.uk' },
   { name: 'Budgetair.pt', host: 'budgetair.pt' },
@@ -12,11 +12,11 @@ export const budgetairEditions = [
   { name: 'Budgetair.es', host: 'budgetair.es' },
 ];
 
-export function canGetBudgetairUrl(currentItin) {
+function canGetBudgetairUrl(currentItin) {
   return currentItin.itin.length <= 3;
 }
 
-export function getBudgetairUrl(currentItin, host) {
+function getBudgetairUrl(currentItin, host) {
   const pax = validatePaxcount({
     maxPaxcount: 9,
     countInf: false,
@@ -48,4 +48,14 @@ export function getBudgetairUrl(currentItin, host) {
     inf: infantsLap,
     ...convertArrayToFlatObject(itinInfo, 1),
   })}`;
+}
+
+export function getBudgetairUrls(currentItin) {
+  if (!canGetBudgetairUrl(currentItin)) {
+    return undefined;
+  }
+
+  return budgetairEditions.map(e => {
+    return { text: e.name, url: getBudgetairUrl(currentItin, e.host) };
+  });
 }

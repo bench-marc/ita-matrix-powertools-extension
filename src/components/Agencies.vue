@@ -85,7 +85,7 @@ import { getIbUrl, ibEditions } from '../urlBuilders/iberia';
 import { getLhUrl, lhEditions } from '../urlBuilders/lufthansa';
 import { getLxUrl, lxEditions } from '../urlBuilders/swiss';
 import { getKlUrl, klEditions } from '../urlBuilders/klm';
-import { budgetairEditions, getBudgetairUrl, canGetBudgetairUrl } from '../urlBuilders/budgetair';
+import { getBudgetairUrls } from '../urlBuilders/budgetair';
 import { getGoogleUrl } from '../urlBuilders/google';
 import UrlContainer from './UrlContainer.vue';
 import WhereToCredit from './WhereToCredit.vue';
@@ -216,12 +216,7 @@ export default {
       return getLastminuteUrl(this.currentItin);
     },
     budgetairUrls: function() {
-      if (!canGetBudgetairUrl(this.currentItin)) {
-        return undefined;
-      }
-      return budgetairEditions.map(e => {
-        return { text: e.name, url: getBudgetairUrl(this.currentItin, e.host) };
-      });
+      return getBudgetairUrls(this.currentItin);
     },
     googleUrl: function() {
       return getGoogleUrl(this.currentItin);
