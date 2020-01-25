@@ -41,9 +41,14 @@
     </div>
     <div class="agency"><a :href="pricelineUrl" target="_blank">Priceline</a><br /></div>
     <div class="agency"><a :href="cheapOairUrl" target="_blank">CheapOair</a><br /></div>
+    <div v-if="edreamsUrls" class="agency">
+      <url-container name="Edreams" :urls="edreamsUrls"></url-container>
+    </div>
     <div v-if="lastminuteUrl" class="agency"><a :href="lastminuteUrl" target="_blank">Lastminute.de</a><br /></div>
+    <div v-if="budgetairUrls" class="agency">
+      <url-container name="Budgetair" :urls="budgetairUrls"></url-container>
+    </div>
     <hr />
-    <div class="agency"><a :href="hipmunkUrl" target="_blank">Hipmunk</a><br /></div>
     <div class="agency">
       <url-container name="Momondo" :urls="momondoUrls"></url-container>
     </div>
@@ -72,7 +77,6 @@ import { getMomondoUrl, momondoEditions } from '../urlBuilders/momondo';
 import { getLastminuteUrl } from '../urlBuilders/lastminute';
 import { getKayakUrl, kayakEditions } from '../urlBuilders/kayak';
 import { getSkyscannerUrl, skyscannerEditions } from '../urlBuilders/skyscanner';
-import { getHipmunkUrl } from '../urlBuilders/hipmunk';
 import { getGcmUrl } from '../urlBuilders/gcm';
 import { getAAc1Url, getAAUrl, aaEditions } from '../urlBuilders/americanAirlines';
 import { getDlUrl, dlEditions } from '../urlBuilders/delta';
@@ -82,6 +86,8 @@ import { getIbUrl, ibEditions } from '../urlBuilders/iberia';
 import { getLhUrl, lhEditions } from '../urlBuilders/lufthansa';
 import { getLxUrl, lxEditions } from '../urlBuilders/swiss';
 import { getKlUrl, klEditions } from '../urlBuilders/klm';
+import { getBudgetairUrls } from '../urlBuilders/budgetair';
+import { getEdreamsUrls } from '../urlBuilders/edreams';
 import { getGoogleUrl } from '../urlBuilders/google';
 import UrlContainer from './UrlContainer.vue';
 import WhereToCredit from './WhereToCredit.vue';
@@ -190,9 +196,6 @@ export default {
         return { text: e.name, url: getExpediaUrl(this.currentItin, e.host) };
       });
     },
-    hipmunkUrl: function() {
-      return getHipmunkUrl(this.currentItin);
-    },
     momondoUrls: function() {
       return momondoEditions.map(e => {
         return { text: e.name, url: getMomondoUrl(this.currentItin, e.host) };
@@ -210,6 +213,12 @@ export default {
     },
     lastminuteUrl: function() {
       return getLastminuteUrl(this.currentItin);
+    },
+    budgetairUrls: function() {
+      return getBudgetairUrls(this.currentItin);
+    },
+    edreamsUrls: function() {
+      return getEdreamsUrls(this.currentItin);
     },
     googleUrl: function() {
       return getGoogleUrl(this.currentItin);
