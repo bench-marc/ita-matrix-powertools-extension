@@ -46,7 +46,6 @@
       <url-container name="Budgetair" :urls="budgetairUrls"></url-container>
     </div>
     <hr />
-    <div class="agency"><a :href="hipmunkUrl" target="_blank">Hipmunk</a><br /></div>
     <div class="agency">
       <url-container name="Momondo" :urls="momondoUrls"></url-container>
     </div>
@@ -75,7 +74,6 @@ import { getMomondoUrl, momondoEditions } from '../urlBuilders/momondo';
 import { getLastminuteUrl } from '../urlBuilders/lastminute';
 import { getKayakUrl, kayakEditions } from '../urlBuilders/kayak';
 import { getSkyscannerUrl, skyscannerEditions } from '../urlBuilders/skyscanner';
-import { getHipmunkUrl } from '../urlBuilders/hipmunk';
 import { getGcmUrl } from '../urlBuilders/gcm';
 import { getAAc1Url, getAAUrl, aaEditions } from '../urlBuilders/americanAirlines';
 import { getDlUrl, dlEditions } from '../urlBuilders/delta';
@@ -193,9 +191,6 @@ export default {
       return exEditions.map(e => {
         return { text: e.name, url: getExpediaUrl(this.currentItin, e.host) };
       });
-    },
-    hipmunkUrl: function() {
-      return getHipmunkUrl(this.currentItin);
     },
     momondoUrls: function() {
       return momondoEditions.map(e => {
