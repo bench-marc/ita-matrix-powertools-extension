@@ -1,4 +1,6 @@
-import dayjs from 'dayjs';
+export function printError(message: string) {
+    console.error(message);
+}
 
 export function exRE(str: string, re: RegExp) {
     let ret = [];
@@ -51,14 +53,11 @@ export interface IDate {
     month: number;
     year: number;
     time?: string;
+    offset?: string;
 }
 
-export function dateObjectToFormatedString({ day, month, year, time }: IDate, format: string) {
-    return dayjs(`${year}-${month}-${day} ${time}`).format(format);
-}
-
-export type KeyValuePair = {
-    [key: string]: object;
+export type KeyValuePair<T = any> = {
+    [key: string]: T;
 };
 
 export function convertArrayToFlatObject(array: any[] = [], startIndex = 0) {

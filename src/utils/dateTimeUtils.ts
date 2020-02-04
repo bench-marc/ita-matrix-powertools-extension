@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import { monthNames, Month } from '../constants';
+import { IDate } from './shared';
 
 const ONE_HOUR_IN_MINUTES = 60;
 
@@ -44,4 +46,8 @@ export function return12htime(value: string) {
         offset = 12;
     }
     return +match[1] + offset + match[2];
+}
+
+export function dateObjectToFormatedString({ day, month, year, time }: IDate, format: string) {
+    return dayjs(`${year}-${month}-${day} ${time}`).format(format);
 }

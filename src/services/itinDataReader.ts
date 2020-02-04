@@ -30,6 +30,7 @@ interface ISeg {
     airportchange: number;
     farecarrier: string;
     farebase: string;
+    cabin: number;
 }
 
 interface IItin {
@@ -244,6 +245,7 @@ export function getCurrentItin(html: string, mptUsersettings: UserSettings): ICu
             airportchange,
             farecarrier,
             farebase,
+            cabin,
         });
 
         // push carrier
